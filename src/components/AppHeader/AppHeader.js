@@ -2,10 +2,13 @@ import React from "react";
 
 import "./AppHeader.css";
 
-const AppHeader = () => {
+const AppHeader = (props) => {
+
+  const { title } = props;
+
   return (
     <div className="app-header">
-      <p className="title">Todo List</p>
+      <p className="title">{title}</p>
       <p className="description">1 more todo, 3 done</p>
     </div>
   );
