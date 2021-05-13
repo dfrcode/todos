@@ -64,9 +64,25 @@ class App extends Component {
     });
   };
 
+  // delete item in array todoData
+  deleteItem = (id) => {
+    this.setState(({ todoData }) => {
+      // search id element
+      const idx = todoData.findIndex((el) => el.id === id);
+
+      // create newArray
+      const newArray = [...todoData.slice(0, idx), ...todoData.slice(idx + 1)];
+
+      // change todoData on newArray
+      return {
+        todoData: newArray,
+      };
+    });
+  };
+
   render() {
     const { title, searchValue, addItemValue, todoData } = this.state;
-    const { enterLabelSearch, addLabelItem, addNewItem } = this;
+    const { enterLabelSearch, addLabelItem, addNewItem, deleteItem } = this;
     return (
       <div className="container">
         <AppHeader title={title} />
@@ -74,7 +90,7 @@ class App extends Component {
           value={searchValue}
           enterLabelSearch={enterLabelSearch}
         />
-        <AppTodoList todoData={todoData} />
+        <AppTodoList todoData={todoData} deleteItem={deleteItem} />
         <AppAddItemPanel
           value={addItemValue}
           addLabelItem={addLabelItem}
