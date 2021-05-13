@@ -1,11 +1,13 @@
 import React from "react";
 
-import "./App";
+import "./App.css";
+
+import AppHeader from "../AppHeader";
 
 const App = () => {
   return (
     <div className="container">
-      <h1>New application...</h1>
+      <AppHeader />
     </div>
   );
 };
