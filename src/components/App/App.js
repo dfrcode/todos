@@ -8,44 +8,29 @@ import AppTodoList from "../AppTodoList";
 import AppAddItemPanel from "../AppAddItemPanel";
 
 class App extends Component {
+  idx = 1;
 
   state = {
     title: "Todo List",
     searchValue: "",
     addItemValue: "",
     todoData: [
-      {
-        id: 1,
-        label: "Learn HTML5",
-        done: false,
-        important: false,
-      },
-      {
-        id: 2,
-        label: "Learn CSS3",
-        done: false,
-        important: false,
-      },
-      {
-        id: 3,
-        label: "Learn JavaScript",
-        done: false,
-        important: false,
-      },
-      {
-        id: 4,
-        label: "Learn React",
-        done: false,
-        important: false,
-      },
-      {
-        id: 5,
-        label: "Learn Redux",
-        done: false,
-        important: false,
-      },
+      this.createItem("Learn HTML5"),
+      this.createItem("Learn CSS3"),
+      this.createItem("Learn JavaScript"),
+      this.createItem("Learn React"),
+      this.createItem("Learn Redux"),
     ],
   };
+
+  createItem(label) {
+    return {
+      id: this.idx++,
+      label,
+      done: false,
+      important: false,
+    };
+  }
 
   // text in search panel
   enterLabelSearch = (e) => {
@@ -71,7 +56,7 @@ class App extends Component {
           value={searchValue}
           enterLabelSearch={enterLabelSearch}
         />
-        <AppTodoList todoData={todoData}/>
+        <AppTodoList todoData={todoData} />
         <AppAddItemPanel value={addItemValue} addLabelItem={addLabelItem} />
       </div>
     );
