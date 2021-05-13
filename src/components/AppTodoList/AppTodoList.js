@@ -5,10 +5,12 @@ import "./AppTodoList.css";
 import { FaTrashAlt, FaExclamation } from "react-icons/fa";
 
 const AppTodoList = (props) => {
-  const { todoData, deleteItem } = props;
+  const { todoData, deleteItem, addDoneItem } = props;
+
   const elements = todoData.map((todo) => (
-    <li key={todo.id} className="list-item">
-      <span className="item-label">{todo.label}</span>
+
+    <li key={todo.id} className={todo.done ? 'list-item done' : 'list-item'}>
+      <span className="item-label" onClick={() => addDoneItem(todo.id)}>{todo.label}</span>
       <ul className="list-fa">
         <li className="list-fa-item trash" onClick={() => deleteItem(todo.id)}>
           <FaTrashAlt />
@@ -18,6 +20,8 @@ const AppTodoList = (props) => {
         </li>
       </ul>
     </li>
+
+    
   ));
 
   return (

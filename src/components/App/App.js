@@ -67,7 +67,7 @@ class App extends Component {
   // delete item in array todoData
   deleteItem = (id) => {
     this.setState(({ todoData }) => {
-      // search id element
+      // search item id
       const idx = todoData.findIndex((el) => el.id === id);
 
       // create newArray
@@ -80,9 +80,25 @@ class App extends Component {
     });
   };
 
+  // checked done item
+  addDoneItem = (id) => {
+    this.setState(({ todoData }) => {
+      // search item id
+      const idx = todoData.findIndex((el) => el.id === id);
+
+      // upgrade oldItem
+      const oldItem = todoData[idx];
+      const newItem = { ...oldItem, done: !oldItem.done };
+
+      return {
+        todoData: [...todoData.slice(0, idx), newItem, ...todoData.slice(idx + 1)]
+      }
+    })
+  }
+
   render() {
     const { title, searchValue, addItemValue, todoData } = this.state;
-    const { enterLabelSearch, addLabelItem, addNewItem, deleteItem } = this;
+    const { enterLabelSearch, addLabelItem, addNewItem, deleteItem, addDoneItem } = this;
     return (
       <div className="container">
         <AppHeader title={title} />
@@ -90,7 +106,7 @@ class App extends Component {
           value={searchValue}
           enterLabelSearch={enterLabelSearch}
         />
-        <AppTodoList todoData={todoData} deleteItem={deleteItem} />
+        <AppTodoList todoData={todoData} deleteItem={deleteItem} addDoneItem={addDoneItem}/>
         <AppAddItemPanel
           value={addItemValue}
           addLabelItem={addLabelItem}
