@@ -123,17 +123,32 @@ class App extends Component {
 
   // search item in AppSearchPanel
   search(arr, item) {
-    if (item === "") {
+    if (item === "all") {
       return arr;
     }
-    return arr.filter((el) => el.label === item);
+    return arr.filter((el) => {
+      return el.label.toLowerCase().indexOf(item.toLowerCase()) > -1;
+    });
   }
 
   // filter in AppSearchPanel
   filterItem = (name) => {
     this.setState({
-      filter: name
-    })
+      filter: name,
+    });
+  };
+
+  // filter all/active/done
+  filterStatus(arr, filter) {
+    if (filter === "all") {
+      return arr;
+    } else if (filter === "active") {
+      return arr.filter((el) => !el.done);
+    } else if (filter === "done") {
+      return arr.filter((el) => el.done);
+    } else {
+      return arr;
+    }
   }
 
   render() {
@@ -149,7 +164,7 @@ class App extends Component {
     } = this;
 
     // search for lable in todoData
-    const visibleData = this.search(todoData, searchValue);
+    const visibleData = this.filterStatus(this.search(todoData, searchValue), filter);
     // done todo
     const watchDone = todoData.filter((el) => el.done === true).length;
     // not done todo
