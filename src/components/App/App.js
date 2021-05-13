@@ -91,14 +91,45 @@ class App extends Component {
       const newItem = { ...oldItem, done: !oldItem.done };
 
       return {
-        todoData: [...todoData.slice(0, idx), newItem, ...todoData.slice(idx + 1)]
-      }
-    })
-  }
+        todoData: [
+          ...todoData.slice(0, idx),
+          newItem,
+          ...todoData.slice(idx + 1),
+        ],
+      };
+    });
+  };
+
+  // checked important item
+  addimportantItem = (id) => {
+    this.setState(({ todoData }) => {
+      // search item id
+      const idx = todoData.findIndex((el) => el.id === id);
+
+      // upgrade oldItem
+      const oldItem = todoData[idx];
+      const newItem = { ...oldItem, important: !oldItem.important };
+
+      return {
+        todoData: [
+          ...todoData.slice(0, idx),
+          newItem,
+          ...todoData.slice(idx + 1),
+        ],
+      };
+    });
+  };
 
   render() {
     const { title, searchValue, addItemValue, todoData } = this.state;
-    const { enterLabelSearch, addLabelItem, addNewItem, deleteItem, addDoneItem } = this;
+    const {
+      enterLabelSearch,
+      addLabelItem,
+      addNewItem,
+      deleteItem,
+      addDoneItem,
+      addimportantItem,
+    } = this;
     return (
       <div className="container">
         <AppHeader title={title} />
@@ -106,7 +137,12 @@ class App extends Component {
           value={searchValue}
           enterLabelSearch={enterLabelSearch}
         />
-        <AppTodoList todoData={todoData} deleteItem={deleteItem} addDoneItem={addDoneItem}/>
+        <AppTodoList
+          todoData={todoData}
+          deleteItem={deleteItem}
+          addDoneItem={addDoneItem}
+          addimportantItem={addimportantItem}
+        />
         <AppAddItemPanel
           value={addItemValue}
           addLabelItem={addLabelItem}
