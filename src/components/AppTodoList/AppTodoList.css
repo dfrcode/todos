@@ -23,26 +23,9 @@
   cursor: pointer;
 }
 
-.list-item.important {
+.list-item.done {
   background-color: rgb(255, 151, 151);
   border: 1px solid rgb(255, 151, 151);
-  box-shadow: 0 2px 17px #ddd;
-  transition: box-shadow 0.2s linear;
-}
-
-.list-item.important:hover {
-  box-shadow: none;
-}
-
-.list-item.important .item-label {
-  color: #fff;
-  text-decoration: line-through;
-  font-weight: bold;
-}
-
-.list-item.done {
-  background-color: rgb(151, 187, 255);
-  border: 1px solid rgb(151, 187, 255);
   box-shadow: 0 2px 17px #ddd;
   transition: box-shadow 0.2s linear;
 }
@@ -52,6 +35,23 @@
 }
 
 .list-item.done .item-label {
+  color: #fff;
+  text-decoration: line-through;
+  font-weight: bold;
+}
+
+.list-item.important {
+  background-color: rgb(151, 187, 255);
+  border: 1px solid rgb(151, 187, 255);
+  box-shadow: 0 2px 17px #ddd;
+  transition: box-shadow 0.2s linear;
+}
+
+.list-item.important:hover {
+  box-shadow: none;
+}
+
+.list-item.important .item-label {
   color: #fff;
   font-weight: bold;
 }
