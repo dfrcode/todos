@@ -120,6 +120,14 @@ class App extends Component {
     });
   };
 
+  // search item in AppSearchPanel
+  search(arr, item) {
+    if (item === "") {
+      return arr;
+    }
+    return arr.filter((el) => el.label === item);
+  }
+
   render() {
     const { title, searchValue, addItemValue, todoData } = this.state;
     const {
@@ -131,18 +139,22 @@ class App extends Component {
       addimportantItem,
     } = this;
 
+    // search for lable in todoData
+    const visibleData = this.search(todoData, searchValue);
+    // done todo
     const watchDone = todoData.filter((el) => el.done === true).length;
+    // not done todo
     const watchNotDone = todoData.filter((el) => el.done === false).length;
 
     return (
       <div className="container">
-        <AppHeader title={title} done={watchDone} notDone={watchNotDone}/>
+        <AppHeader title={title} done={watchDone} notDone={watchNotDone} />
         <AppSearchPanel
           value={searchValue}
           enterLabelSearch={enterLabelSearch}
         />
         <AppTodoList
-          todoData={todoData}
+          todoData={visibleData}
           deleteItem={deleteItem}
           addDoneItem={addDoneItem}
           addimportantItem={addimportantItem}
