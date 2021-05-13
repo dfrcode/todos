@@ -130,10 +130,14 @@ class App extends Component {
   }
 
   // filter in AppSearchPanel
-  
+  filterItem = (name) => {
+    this.setState({
+      filter: name
+    })
+  }
 
   render() {
-    const { title, searchValue, addItemValue, todoData } = this.state;
+    const { title, searchValue, addItemValue, todoData, filter } = this.state;
     const {
       enterLabelSearch,
       addLabelItem,
@@ -141,6 +145,7 @@ class App extends Component {
       deleteItem,
       addDoneItem,
       addimportantItem,
+      filterItem,
     } = this;
 
     // search for lable in todoData
@@ -156,6 +161,8 @@ class App extends Component {
         <AppSearchPanel
           value={searchValue}
           enterLabelSearch={enterLabelSearch}
+          filter={filter}
+          filterItem={filterItem}
         />
         <AppTodoList
           todoData={visibleData}

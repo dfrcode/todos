@@ -3,7 +3,7 @@ import React from "react";
 import "./AppSearchPanel.css";
 
 const AppSearchPanel = (props) => {
-  const { value, enterLabelSearch } = props;
+  const { value, enterLabelSearch, filter, filterItem } = props;
 
   const buttonData = [
     {
@@ -20,9 +20,25 @@ const AppSearchPanel = (props) => {
     },
   ];
 
-  const buttons = buttonData.map((button) => (
-    <button key={button.name} className={`btn btn-${button.name}`}>{button.label}</button>
-  ));
+  const buttons = buttonData.map((button) =>
+    button.name === filter ? (
+      <button
+        key={button.name}
+        className={`btn btn-${button.name} active`}
+        onClick={() => filterItem(button.name)}
+      >
+        {button.label}
+      </button>
+    ) : (
+      <button
+        key={button.name}
+        className={`btn btn-${button.name}`}
+        onClick={() => filterItem(button.name)}
+      >
+        {button.label}
+      </button>
+    )
+  );
 
   return (
     <div className="app-search-panel">
