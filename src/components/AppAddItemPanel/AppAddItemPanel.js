@@ -3,10 +3,10 @@ import React from "react";
 import "./AppAddItemPanel.css";
 
 const AppAddItemPanel = (props) => {
-  const { addItemValue, addLabelItem } = props;
+  const { addItemValue, addLabelItem, addNewItem } = props;
 
   return (
-    <form className="app-add-item-panel">
+    <form onSubmit={addNewItem} className="app-add-item-panel">
       <input
         className="input-forn-add-item"
         type="text"

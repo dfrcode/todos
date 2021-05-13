@@ -23,6 +23,7 @@ class App extends Component {
     ],
   };
 
+  // create item in array todoData
   createItem(label) {
     return {
       id: this.idx++,
@@ -46,9 +47,26 @@ class App extends Component {
     });
   };
 
+  // add item in array todoData
+  addNewItem = (e) => {
+    e.preventDefault();
+    this.setState(({ todoData }) => {
+      todoData.length === 0 ? (this.idx = 1) : (this.idx = todoData.length + 1);
+      const newItem = {
+        id: this.idx,
+        label: this.state.addItemValue,
+        done: false,
+        important: false,
+      };
+      return {
+        todoData: [...todoData, newItem],
+      };
+    });
+  };
+
   render() {
     const { title, searchValue, addItemValue, todoData } = this.state;
-    const { enterLabelSearch, addLabelItem } = this;
+    const { enterLabelSearch, addLabelItem, addNewItem } = this;
     return (
       <div className="container">
         <AppHeader title={title} />
@@ -57,7 +75,11 @@ class App extends Component {
           enterLabelSearch={enterLabelSearch}
         />
         <AppTodoList todoData={todoData} />
-        <AppAddItemPanel value={addItemValue} addLabelItem={addLabelItem} />
+        <AppAddItemPanel
+          value={addItemValue}
+          addLabelItem={addLabelItem}
+          addNewItem={addNewItem}
+        />
       </div>
     );
   }
