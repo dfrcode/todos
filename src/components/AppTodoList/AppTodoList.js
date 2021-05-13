@@ -8,7 +8,7 @@ const AppTodoList = () => {
   return (
     <div className="todo-list">
       <ul className="list">
-        <li className="list-item">
+        <li className="list-item done">
           <span className="item-label">Learn HTML5</span>
           <ul className="list-fa">
             <li className="list-fa-item trash">
@@ -19,7 +19,7 @@ const AppTodoList = () => {
             </li>
           </ul>
         </li>
-        <li className="list-item">
+        <li className="list-item important">
         <span className="item-label">Learn CSS3</span>
           <ul className="list-fa">
             <li className="list-fa-item trash">
