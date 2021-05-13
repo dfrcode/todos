@@ -130,9 +130,13 @@ class App extends Component {
       addDoneItem,
       addimportantItem,
     } = this;
+
+    const watchDone = todoData.filter((el) => el.done === true).length;
+    const watchNotDone = todoData.filter((el) => el.done === false).length;
+
     return (
       <div className="container">
-        <AppHeader title={title} />
+        <AppHeader title={title} done={watchDone} notDone={watchNotDone}/>
         <AppSearchPanel
           value={searchValue}
           enterLabelSearch={enterLabelSearch}
