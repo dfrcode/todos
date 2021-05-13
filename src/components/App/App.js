@@ -4,6 +4,7 @@ import "./App.css";
 
 import AppHeader from "../AppHeader";
 import AppSearchPanel from "../AppSearchPanel";
+import AppTodoList from "../AppTodoList";
 
 class App extends Component {
   state = {
@@ -24,6 +25,7 @@ class App extends Component {
       <div className="container">
         <AppHeader title={title} />
         <AppSearchPanel value={searchValue} enterLabelSearch={enterLabelSearch}/>
+        <AppTodoList />
       </div>
     );
   }
