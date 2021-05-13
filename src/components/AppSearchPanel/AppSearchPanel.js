@@ -5,6 +5,25 @@ import "./AppSearchPanel.css";
 const AppSearchPanel = (props) => {
   const { value, enterLabelSearch } = props;
 
+  const buttonData = [
+    {
+      name: "all",
+      label: "All",
+    },
+    {
+      name: "active",
+      label: "Active",
+    },
+    {
+      name: "done",
+      label: "Done",
+    },
+  ];
+
+  const buttons = buttonData.map((button) => (
+    <button key={button.name} className={`btn btn-${button.name}`}>{button.label}</button>
+  ));
+
   return (
     <div className="app-search-panel">
       <input
@@ -14,11 +33,7 @@ const AppSearchPanel = (props) => {
         onChange={enterLabelSearch}
         placeholder="Search..."
       />
-      <div className="group-button">
-        <button className="btn btn-all active">All</button>
-        <button className="btn btn-active">Active</button>
-        <button className="btn btn-done">Done</button>
-      </div>
+      <div className="group-button">{buttons}</div>
     </div>
   );
 };

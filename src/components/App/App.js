@@ -11,6 +11,7 @@ class App extends Component {
   idx = 1;
 
   state = {
+    filter: "all", // all, active, done
     title: "Todo List",
     searchValue: "",
     addItemValue: "",
@@ -127,6 +128,9 @@ class App extends Component {
     }
     return arr.filter((el) => el.label === item);
   }
+
+  // filter in AppSearchPanel
+  
 
   render() {
     const { title, searchValue, addItemValue, todoData } = this.state;
