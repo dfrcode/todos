@@ -35,7 +35,7 @@ const AppTodoList = (props) => {
     >
       <div className="box-front-item">
         <span className="item-label" onClick={() => addDoneItem(todo.id)}>
-          {todo.label}
+          {todo.label !== "" ? todo.label : "NO LABEL"}
         </span>
         <ul className="list-fa">
           <li
