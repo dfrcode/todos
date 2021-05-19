@@ -160,14 +160,20 @@ class App extends Component {
       const oldItem = todoData[idx];
       const newItem = { ...oldItem, label: changeLabelText };
 
-      return {
-        todoData: [
-          ...todoData.slice(0, idx),
-          newItem,
-          ...todoData.slice(idx + 1),
-        ],
-        changeLabelText: "",
-      };
+      if (changeLabelText !== "") {
+        return {
+          todoData: [
+            ...todoData.slice(0, idx),
+            newItem,
+            ...todoData.slice(idx + 1),
+          ],
+          changeLabelText: "",
+        };
+      } else {
+        return {
+          todoData: [...todoData],
+        };
+      }
     });
   };
 
