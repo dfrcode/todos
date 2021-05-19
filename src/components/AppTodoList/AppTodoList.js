@@ -2,10 +2,25 @@ import React from "react";
 
 import "./AppTodoList.css";
 
-import { FaTrashAlt, FaExclamation } from "react-icons/fa";
+import {
+  FaPencilAlt,
+  FaTrashAlt,
+  FaExclamation,
+  FaExchangeAlt,
+  FaTimes,
+} from "react-icons/fa";
 
 const AppTodoList = (props) => {
-  const { todoData, deleteItem, addDoneItem, addimportantItem } = props;
+  const {
+    todoData,
+    deleteItem,
+    addDoneItem,
+    changeItem,
+    addimportantItem,
+    value,
+    changeLabelItem,
+    changeClickLabel,
+  } = props;
 
   const elements = todoData.map((todo) => (
     <li
@@ -18,20 +33,57 @@ const AppTodoList = (props) => {
           : "list-item"
       }
     >
-      <span className="item-label" onClick={() => addDoneItem(todo.id)}>
-        {todo.label}
-      </span>
-      <ul className="list-fa">
-        <li className="list-fa-item trash" onClick={() => deleteItem(todo.id)}>
-          <FaTrashAlt />
-        </li>
-        <li
-          className="list-fa-item important"
-          onClick={() => addimportantItem(todo.id)}
-        >
-          <FaExclamation />
-        </li>
-      </ul>
+      <div className="box-front-item">
+        <span className="item-label" onClick={() => addDoneItem(todo.id)}>
+          {todo.label}
+        </span>
+        <ul className="list-fa">
+          <li
+            className="list-fa-item trash"
+            onClick={() => deleteItem(todo.id)}
+          >
+            <FaTrashAlt />
+          </li>
+          <li
+            className="list-fa-item pencil"
+            onClick={() => changeItem(todo.id)}
+          >
+            <FaPencilAlt />
+          </li>
+          <li
+            className="list-fa-item important"
+            onClick={() => addimportantItem(todo.id)}
+          >
+            <FaExclamation />
+          </li>
+        </ul>
+      </div>
+
+      {todo.change ? (
+        <div className="box-back-item">
+          <input
+            className="input-change-text-item"
+            type="text"
+            placeholder="Changed Text Item"
+            value={value}
+            onChange={changeLabelItem}
+          />
+          <ul className="list-fa">
+            <li
+              className="list-fa-item times"
+              onClick={() => changeItem(todo.id)}
+            >
+              <FaTimes />
+            </li>
+            <li
+              className="list-fa-item change"
+              onClick={() => changeClickLabel(todo.id)}
+            >
+              <FaExchangeAlt />
+            </li>
+          </ul>
+        </div>
+      ) : null}
     </li>
   ));
 

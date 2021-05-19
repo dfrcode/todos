@@ -15,6 +15,7 @@ class App extends Component {
     title: "Todo List",
     searchValue: "",
     addItemValue: "",
+    changeLabelText: "",
     todoData: [
       this.createItem("Learn HTML5"),
       this.createItem("Learn CSS3"),
@@ -30,6 +31,7 @@ class App extends Component {
       id: this.idx++,
       label,
       done: false,
+      change: false,
       important: false,
     };
   }
@@ -45,6 +47,13 @@ class App extends Component {
   addLabelItem = (e) => {
     this.setState({
       addItemValue: e.target.value,
+    });
+  };
+
+  // text in change panel
+  changeLabelItem = (e) => {
+    this.setState({
+      changeLabelText: e.target.value,
     });
   };
 
@@ -101,6 +110,26 @@ class App extends Component {
     });
   };
 
+  // checked change item
+  changeItem = (id) => {
+    this.setState(({ todoData }) => {
+      // search item id
+      const idx = todoData.findIndex((el) => el.id === id);
+
+      // upgrade oldItem
+      const oldItem = todoData[idx];
+      const newItem = { ...oldItem, change: !oldItem.change };
+
+      return {
+        todoData: [
+          ...todoData.slice(0, idx),
+          newItem,
+          ...todoData.slice(idx + 1),
+        ],
+      };
+    });
+  };
+
   // checked important item
   addimportantItem = (id) => {
     this.setState(({ todoData }) => {
@@ -117,6 +146,27 @@ class App extends Component {
           newItem,
           ...todoData.slice(idx + 1),
         ],
+      };
+    });
+  };
+
+  // changed label
+  changeClickLabel = (id) => {
+    this.setState(({ todoData, changeLabelText }) => {
+      // search item id
+      const idx = todoData.findIndex((el) => el.id === id);
+
+      // upgrade oldItem
+      const oldItem = todoData[idx];
+      const newItem = { ...oldItem, label: changeLabelText };
+
+      return {
+        todoData: [
+          ...todoData.slice(0, idx),
+          newItem,
+          ...todoData.slice(idx + 1),
+        ],
+        changeLabelText: "",
       };
     });
   };
@@ -159,12 +209,19 @@ class App extends Component {
       addNewItem,
       deleteItem,
       addDoneItem,
+      changeItem,
+      changeLabelText,
+      changeLabelItem,
+      changeClickLabel,
       addimportantItem,
       filterItem,
     } = this;
 
     // search for lable in todoData
-    const visibleData = this.filterStatus(this.search(todoData, searchValue), filter);
+    const visibleData = this.filterStatus(
+      this.search(todoData, searchValue),
+      filter
+    );
     // done todo
     const watchDone = todoData.filter((el) => el.done === true).length;
     // not done todo
@@ -183,6 +240,10 @@ class App extends Component {
           todoData={visibleData}
           deleteItem={deleteItem}
           addDoneItem={addDoneItem}
+          changeItem={changeItem}
+          value={changeLabelText}
+          changeLabelItem={changeLabelItem}
+          changeClickLabel={changeClickLabel}
           addimportantItem={addimportantItem}
         />
         <AppAddItemPanel
